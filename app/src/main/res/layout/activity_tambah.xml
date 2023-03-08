@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:hint="Nama Player"
             android:textSize="21sp"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:inputType="text"
             />
@@ -37,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nomor Punggung"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:textSize="21sp"
             android:inputType="number"
@@ -47,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Klub Player"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:textSize="21sp"
             android:inputType="text"

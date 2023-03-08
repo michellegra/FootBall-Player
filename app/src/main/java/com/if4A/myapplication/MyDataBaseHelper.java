@@ -33,11 +33,26 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
                 ");"
                 ;
         db.execSQL(query);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        db.execSQL(query);
+        onCreate(db);
 
     }
+    public long tambahPlayer (String nama, String nomor , String klub)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(FIELD_NAMA, nama);
+        cv.put(FIELD_NOMOR, nomor);
+        cv.put(FIELd_KLUB, klub);
+
+        long eksekusi = db.insert(TABLE_NAME, null, cv);
+        return eksekusi;
+    }
+
 }
