@@ -55,4 +55,14 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         return eksekusi;
     }
 
+    public Cursor bacaDataPlayer(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + FIELD_NAMA;
+
+        Cursor varCursor = null;
+        if(db != null){
+            varCursor = db.rawQuery(query, null);
+        }
+        return  varCursor;
+    }
 }
