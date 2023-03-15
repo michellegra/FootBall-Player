@@ -1,22 +1,26 @@
 package com.if4A.myapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class AdapterFootBallPlayer extends RecyclerView.Adapter<AdapterFootBallPlayer.ViewHolderPlayer> {
     private Context ctx;
-    private ArrayList arrNama,arrNomor,arrKlub;
+    private ArrayList arrID, arrNama, arrNomor,arrKlub;
 
-    public AdapterFootBallPlayer(Context ctx, ArrayList arrNama, ArrayList arrNomor, ArrayList arrKlub) {
+    public AdapterFootBallPlayer(Context ctx, ArrayList arrID,ArrayList arrNama, ArrayList arrNomor, ArrayList arrKlub) {
         this.ctx = ctx;
+        this.arrID = arrID;
         this.arrNama = arrNama;
         this.arrNomor = arrNomor;
         this.arrKlub = arrKlub;
@@ -32,10 +36,10 @@ public class AdapterFootBallPlayer extends RecyclerView.Adapter<AdapterFootBallP
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPlayer holder, int position) {
+        holder.tvID.setText(arrID.get(position).toString());
         holder.tvNama.setText(arrNama.get(position).toString());
         holder.tvNomor.setText(arrNomor.get(position).toString());
         holder.tvKlub.setText(arrKlub.get(position).toString());
-
     }
 
     @Override
@@ -44,13 +48,52 @@ public class AdapterFootBallPlayer extends RecyclerView.Adapter<AdapterFootBallP
     }
 
     public class ViewHolderPlayer extends RecyclerView.ViewHolder{
-        private TextView tvNama, tvNomor, tvKlub;
+        private TextView tvID, tvNama, tvNomor, tvKlub;
 
         public ViewHolderPlayer(@NonNull View itemView) {
             super(itemView);
+            tvID = itemView.findViewById(R.id.tv_id);
             tvNama =itemView.findViewById(R.id.tv_nama);
             tvNomor =itemView.findViewById(R.id.tv_no);
             tvKlub =itemView.findViewById(R.id.tv_klub);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder pesan = new AlertDialog.Builder(ctx);
+                    pesan. setTitle("Perhatian");
+                    pesan.setMessage("Anda Memilih " + tvNama.getText().toString() + ". Pilih perintah yang anda inginkan terhadap nama berikut");
+                    pesan. setCancelable(true);
+
+                    pesan.setPositiveButton("Ubah", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    pesan.setNegativeButton("Hapus", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MyDataBaseHelper myDB = new MyDataBaseHelper(ctx);
+                            long eksekusi = myDB.hapusPlayer(tvID.getText().toString());
+                            if(eksekusi == -1){
+                                Toast.makeText(ctx, "Gagal Menghapus Data! ", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(ctx, "Sukses Menghapus Data!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                ((MainActivity) ctx).onResume();
+                            }
+
+                        }
+                    });
+
+                    pesan.show();
+                    return false;
+                }
+            });
+
+            }
         }
     }
-}

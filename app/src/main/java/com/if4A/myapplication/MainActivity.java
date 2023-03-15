@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabTambah;
     private RecyclerView rvPlayer;
     private AdapterFootBallPlayer adPlayer;
-    private ArrayList<String> arrNama, arrNomor, arrKlub;
+    private ArrayList<String> arrID, arrNama, arrNomor, arrKlub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             while (varCursor.moveToNext()){
+                arrID.add(varCursor.getString(0));
                 arrNama.add(varCursor.getString(1));
                 arrNomor.add(varCursor.getString(2));
                 arrKlub.add(varCursor.getString(3));
@@ -59,13 +60,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void tampilPlayer(){
+        arrID = new ArrayList<>();
         arrNama = new ArrayList<>();
         arrNomor = new ArrayList<>();
         arrKlub = new ArrayList<>();
 
         SQliteToArrayList();
 
-        adPlayer = new AdapterFootBallPlayer(MainActivity.this,arrNama,arrNomor,arrKlub);;
+        adPlayer = new AdapterFootBallPlayer(MainActivity.this,arrID, arrNama,arrNomor,arrKlub);
 
         rvPlayer.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         rvPlayer.setAdapter(adPlayer);
