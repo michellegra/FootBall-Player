@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="6dp"
-    android:background="@drawable/g"
+    android:background="@drawable/m1"
     android:orientation="vertical"
     tools:context=".UbahActivity">
 
@@ -16,7 +16,7 @@
         android:text="Ubah Data Player"
         android:textSize="21sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:layout_marginBottom="32dp"
@@ -27,7 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nama Player"
-        android:textColor="@color/white"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:textSize="21sp"
         android:inputType="text"
         />
@@ -37,7 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nomor Punggung"
-        android:textColor="@color/white"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:textSize="21sp"
         android:inputType="number"
         />
@@ -47,8 +49,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Klub Player"
+        android:textColorHint="@color/black"
         android:textSize="21sp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:inputType="text"
         />
 
@@ -57,7 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#E2B256"
+        android:backgroundTint="#C2BDD2"
         android:textSize="21sp"
+        android:textColor="@color/black"
         android:text="UBAH"/>
 </LinearLayout>
